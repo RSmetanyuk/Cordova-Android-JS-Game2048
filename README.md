@@ -2,6 +2,7 @@ This is my first hybrid mobile application built by PHONEGAP/CORDOVA with HTML, 
 
 It is the popular game 2048, which HTML, CSS, and JavaScript code I took from here https://code.sololearn.com/WYWMDCa664ex#html
 
+![Mobile game 2048](2048.jpg)
 
 HOW TO START THIS APP ON PHONE
 
