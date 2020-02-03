@@ -70,6 +70,7 @@ h1.title a {
 
 .author {
   font-style: italic;
+  color: #cdc1b4ad;
 }
 
 .scores-container {
@@ -667,7 +668,7 @@ hr {
 }
 
 .restart-button {
-  background: #8f7a66;
+  background: #f2b079;
   border-radius: 3px;
   padding: 5px;
   text-decoration: none;
@@ -1343,112 +1344,108 @@ footer {
   display: none;
 }
 
-@media all and (orientation: portrait) {
-
-  @media screen and (max-width: 860px) {
-    .side-column {
-      width: 130px;
-    }
-
-    .side-ad {
-      display: none;
-    }
-
-    .solitaire-ad img {
-      width: 100px;
-    }
-
-    .side-column-left {
-      background-position: -60px 0px;
-    }
+@media screen and (max-width: 860px) {
+  .side-column {
+    width: 130px;
   }
 
-  @media screen and (max-width: 760px) {
-    .side-column {
-      display: none;
-    }
-
-    .mobile-top {
-      display: block;
-    }
-
-    body {
-      padding: 0px;
-    }
+  .side-ad {
+    display: none;
   }
 
-  @media screen and (max-width: 480px) {
-
-    html,
-    body {
-      font-size: 15px;
-    }
-
-    body {
-      margin: 0 0 20px 0;
-    }
-
-    #flappy-thirds-wrapper canvas {
-      width: 100%;
-    }
-
-    .restart-button {
-      padding: 3px;
-    }
-
-    .game-container {
-      margin-top: 10px;
-    }
-
-    .score-container:after,
-    .best-container:after {
-      font-size: 11px;
-    }
-
-    .approved img {
-      width: 280px;
-    }
-
-    .play-now a {
-      padding: 8px;
-    }
-
-    h1.title-internal {
-      font-size: 24px;
-    }
-
-    .share-img {
-      display: none;
-    }
-
-    .share-img-small {
-      display: none;
-    }
-
-    .tips-and-tricks li a {
-      width: 280px;
-    }
-
-    .tips-and-tricks li a.even {
-      margin-right: 0px;
-    }
-
-    .top-link-ads-wrapper {
-      display: none;
-    }
-
-    .fb-line {
-      float: left;
-      width: 100%;
-      font-size: 15px;
-    }
-
-    .ads-bellow-game {
-      margin-top: 30px;
-      text-align: center;
-      float: none;
-      width: 100%;
-    }
+  .solitaire-ad img {
+    width: 100px;
   }
 
+  .side-column-left {
+    background-position: -60px 0px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .side-column {
+    display: none;
+  }
+
+  .mobile-top {
+    display: block;
+  }
+
+  body {
+    padding: 0px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  html,
+  body {
+    font-size: 15px;
+  }
+
+  body {
+    margin: 0 0 20px 0;
+  }
+
+  #flappy-thirds-wrapper canvas {
+    width: 100%;
+  }
+
+  .restart-button {
+    padding: 3px;
+  }
+
+  .game-container {
+    margin-top: 10px;
+  }
+
+  .score-container:after,
+  .best-container:after {
+    font-size: 11px;
+  }
+
+  .approved img {
+    width: 280px;
+  }
+
+  .play-now a {
+    padding: 8px;
+  }
+
+  h1.title-internal {
+    font-size: 24px;
+  }
+
+  .share-img {
+    display: none;
+  }
+
+  .share-img-small {
+    display: none;
+  }
+
+  .tips-and-tricks li a {
+    width: 280px;
+  }
+
+  .tips-and-tricks li a.even {
+    margin-right: 0px;
+  }
+
+  .top-link-ads-wrapper {
+    display: none;
+  }
+
+  .fb-line {
+    float: left;
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .ads-bellow-game {
+    margin-top: 30px;
+    text-align: center;
+    float: none;
+    width: 100%;
+  }
 }
