@@ -80,11 +80,11 @@ h1.title a {
   background: #bbada0;
   padding: 15px 25px;
   font-size: 25px;
-  height: 25px;
+  height: 55px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
-  color: white;
+  color: inherit;
   margin-top: 8px;
   text-align: center;
 }
@@ -662,21 +662,12 @@ hr {
   animation-fill-mode: backwards;
 }
 
-.game-intro {
-  float: left;
-  line-height: 42px;
-  margin-bottom: 0;
-}
-
 .restart-button {
-  display: inline-block;
   background: #8f7a66;
   border-radius: 3px;
-  padding: 0 20px;
+  padding: 5px;
   text-decoration: none;
   color: #f9f6f2;
-  height: 40px;
-  line-height: 42px;
   display: block;
   text-align: center;
   float: right;
@@ -717,21 +708,6 @@ hr {
 
   .heading {
     margin-bottom: 10px;
-  }
-
-  .game-intro {
-    width: 55%;
-    display: block;
-    box-sizing: border-box;
-    line-height: 1.65;
-  }
-
-  .restart-button {
-    width: 42%;
-    padding: 0;
-    display: block;
-    box-sizing: border-box;
-    margin-top: 2px;
   }
 
   .game-container {
@@ -1143,12 +1119,6 @@ p {
 
 .text-center {
   text-align: center;
-}
-
-.game-intro {
-  line-height: inherit;
-  float: none;
-  width: 100% !important;
 }
 
 .game-explanation {
@@ -1664,14 +1634,6 @@ footer {
     font-size: 33px !important;
   }
 
-  .game-intro {
-    font-size: 17px;
-  }
-
-  .restart-button {
-    padding: 0 14px;
-  }
-
   .game-container {
     margin-top: 10px;
   }
@@ -1701,7 +1663,7 @@ footer {
   }
 
   .restart-button {
-    width: 35%;
+    padding: 3px;
   }
 
   .game-container {
