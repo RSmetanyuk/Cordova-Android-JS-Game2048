@@ -121,6 +121,8 @@ KeyboardInputManager.prototype.listen = function () {
     });
     this.bindButtonPress(".retry-button", this.restart);
     this.bindButtonPress(".restart-button", this.restart);
+    this.bindButtonPress(".save-button", this.save);                           ////////////////////////
+    this.bindButtonPress(".restore-button", this.restore);                     ////////////////////////
     this.bindButtonPress(".keep-playing-button", this.keepPlaying);
     var c, d, e = document.getElementsByClassName("game-container")[0];
     e.addEventListener(this.eventTouchstart, function (a) {
@@ -152,6 +154,16 @@ KeyboardInputManager.prototype.restart = function (a) {
     this.emit("restart")
 }
     ;
+KeyboardInputManager.prototype.save = function (a) {    ///////////////////
+    a.preventDefault();
+    this.emit("save")
+}
+    ;                                                   ////////////////////
+KeyboardInputManager.prototype.restore = function (a) { ///////////////////
+    a.preventDefault();
+    this.emit("restore")
+}
+    ;                                                   ////////////////////
 KeyboardInputManager.prototype.keepPlaying = function (a) {
     a.preventDefault();
     this.emit("keepPlaying")
@@ -407,6 +419,7 @@ window.fakeStorage = {
 function LocalStorageManager() {
     this.bestScoreKey = "bestScore";
     this.gameStateKey = "gameState";
+    this.gameSavedKey = "gameSaved";                ////////////////////////////////////////////////
     this.storage = this.localStorageSupported() ? window.localStorage : window.fakeStorage
 }
 LocalStorageManager.prototype.localStorageSupported = function () {
@@ -437,6 +450,15 @@ LocalStorageManager.prototype.setGameState = function (a) {
     this.storage.setItem(this.gameStateKey, JSON.stringify(a))
 }
     ;
+LocalStorageManager.prototype.getGameSaved = function () {              //////////////////////////
+    var a = this.storage.getItem(this.gameSavedKey);
+    return a ? JSON.parse(a) : null
+}
+    ;                                                                   //////////////////////////
+LocalStorageManager.prototype.setGameSaved = function (a) {             //////////////////////////
+    this.storage.setItem(this.gameSavedKey, JSON.stringify(a))
+}
+    ;                                                                   //////////////////////////
 LocalStorageManager.prototype.clearGameState = function () {
     this.storage.removeItem(this.gameStateKey)
 }
@@ -449,6 +471,8 @@ function GameManager(a, b, c, d) {
     this.startTiles = 2;
     this.inputManager.on("move", this.move.bind(this));
     this.inputManager.on("restart", this.restart.bind(this));
+    this.inputManager.on("save", this.save.bind(this));                 //////////////////////////////
+    this.inputManager.on("restore", this.restore.bind(this));           //////////////////////////////
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.setup()
 }
@@ -458,6 +482,24 @@ GameManager.prototype.restart = function () {
     this.setup()
 }
     ;
+GameManager.prototype.save = function () {                              //////////////////////////////
+    this.storageManager.setGameSaved(this.serialize());
+}
+    ;                                                                   //////////////////////////////
+GameManager.prototype.restore = function () {                           ////////////////////////////// ?????
+    var a = this.storageManager.getGameSaved();
+    a ? (this.grid = new Grid(a.grid.size, a.grid.cells),
+        this.score = a.score,
+        this.over = a.over,
+        this.won = a.won,
+        this.keepPlaying = a.keepPlaying) : (this.grid = new Grid(this.size),
+            this.score = 0,
+            this.keepPlaying = this.won = this.over = !1,
+            this.addStartTiles());
+    this.actuator.continueGame();
+    this.actuate()
+}
+    ;                                                                   ////////////////////////////// ?????
 GameManager.prototype.keepPlaying = function () {
     this.keepPlaying = !0;
     this.actuator.continueGame()
