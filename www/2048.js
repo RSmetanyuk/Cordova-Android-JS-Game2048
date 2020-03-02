@@ -123,6 +123,7 @@ KeyboardInputManager.prototype.listen = function () {
     this.bindButtonPress(".restart-button", this.restart);
     this.bindButtonPress(".save-button", this.save);                           ////////////////////////
     this.bindButtonPress(".restore-button", this.restore);                     ////////////////////////
+    this.bindButtonPress(".about-button", this.about);                         ////////////////////////
     this.bindButtonPress(".keep-playing-button", this.keepPlaying);
     var c, d, e = document.getElementsByClassName("game-container")[0];
     e.addEventListener(this.eventTouchstart, function (a) {
@@ -151,19 +152,31 @@ KeyboardInputManager.prototype.listen = function () {
     ;
 KeyboardInputManager.prototype.restart = function (a) {
     a.preventDefault();
-    this.emit("restart")
+    a.target.classList.add("pressed");                         ///////////////////
+    this.emit("restart");
+    a.target.addEventListener("webkitAnimationEnd", () => a.target.classList.remove("pressed"), { once: true });    //////////////
 }
     ;
 KeyboardInputManager.prototype.save = function (a) {    ///////////////////
     a.preventDefault();
-    this.emit("save")
+    a.target.classList.add("pressed");
+    this.emit("save");
+    a.target.addEventListener("webkitAnimationEnd", () => a.target.classList.remove("pressed"), { once: true });
 }
     ;                                                   ////////////////////
 KeyboardInputManager.prototype.restore = function (a) { ///////////////////
     a.preventDefault();
+    a.target.classList.add("pressed");
     this.emit("restore")
+    a.target.addEventListener("webkitAnimationEnd", () => a.target.classList.remove("pressed"), { once: true });
 }
     ;                                                   ////////////////////
+KeyboardInputManager.prototype.about = function (a) {    ///////////////////
+    a.preventDefault();
+    a.target.classList.add("pressed");
+    this.emit("about");
+    a.target.addEventListener("webkitAnimationEnd", () => a.target.classList.remove("pressed"), { once: true });
+}                                                       ///////////////////
 KeyboardInputManager.prototype.keepPlaying = function (a) {
     a.preventDefault();
     this.emit("keepPlaying")
@@ -419,7 +432,7 @@ window.fakeStorage = {
 function LocalStorageManager() {
     this.bestScoreKey = "bestScore";
     this.gameStateKey = "gameState";
-    this.gameSavedKey = "gameSaved";                ////////////////////////////////////////////////
+    this.gameSavedKey = "gameSaved";                                            /////////////////////////
     this.storage = this.localStorageSupported() ? window.localStorage : window.fakeStorage
 }
 LocalStorageManager.prototype.localStorageSupported = function () {
@@ -473,6 +486,7 @@ function GameManager(a, b, c, d) {
     this.inputManager.on("restart", this.restart.bind(this));
     this.inputManager.on("save", this.save.bind(this));                 //////////////////////////////
     this.inputManager.on("restore", this.restore.bind(this));           //////////////////////////////
+    this.inputManager.on("about", this.about.bind(this));               //////////////////////////////
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.setup()
 }
@@ -486,7 +500,7 @@ GameManager.prototype.save = function () {                              ////////
     this.storageManager.setGameSaved(this.serialize());
 }
     ;                                                                   //////////////////////////////
-GameManager.prototype.restore = function () {                           ////////////////////////////// ?????
+GameManager.prototype.restore = function () {                           ////////////////////////////// 
     var a = this.storageManager.getGameSaved();
     a ? (this.grid = new Grid(a.grid.size, a.grid.cells),
         this.score = a.score,
@@ -499,7 +513,48 @@ GameManager.prototype.restore = function () {                           ////////
     this.actuator.continueGame();
     this.actuate()
 }
-    ;                                                                   ////////////////////////////// ?????
+    ;                                                                   ////////////////////////////// 
+GameManager.prototype.about = function () {
+    Swal.fire({
+        title: '<strong>About Game "2048"</strong>',
+        imageUrl: './Photo.png',
+        imageHeight: 200,
+        imageAlt: 'Developer photo',
+        html:
+            '<b>HOW TO PLAY</b>:<br>' +
+            'Use gestures or arrow keys to move the tiles. ' +
+            'When two tiles with the same number touch, they merge into one!<br><br>' +
+            'This game is fully free for you and no adds!<br><br>' +
+            '<b>Contact me:</b><br>' +
+            '<a href = "mailto: rsmetanyuk@gmail.com">Send Email</a><br>' +
+            '<a href = "https://www.linkedin.com/in/roman-smetanyuk-07b6b0149/">Linkedin</a>',
+        showCloseButton: true,
+
+    })
+
+
+
+
+
+    // const lines = ['You are very important to us, all information received will always remain confidential.',
+    //     'We will contact you as soon as we review your message.',
+    //     'sdsd'];
+    // Swal.fire('About Game "2048"',
+    //     'This game is fully free for you and no adds! \n dfdf'
+
+
+    // {
+    //     //grow: 'fullscreen',
+    //     title: 'About Game "2048"',
+    //     text: 'This game is fully free for you and no adds!',
+    //     imageUrl: './Photo.png',
+    //     imageHeight: 200,
+    //     imageAlt: 'Developer photo'
+    // },
+
+    // )
+}                                                                       //////////////////////////////
+    ;
 GameManager.prototype.keepPlaying = function () {
     this.keepPlaying = !0;
     this.actuator.continueGame()
