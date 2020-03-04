@@ -531,28 +531,6 @@ GameManager.prototype.about = function () {
         showCloseButton: true,
 
     })
-
-
-
-
-
-    // const lines = ['You are very important to us, all information received will always remain confidential.',
-    //     'We will contact you as soon as we review your message.',
-    //     'sdsd'];
-    // Swal.fire('About Game "2048"',
-    //     'This game is fully free for you and no adds! \n dfdf'
-
-
-    // {
-    //     //grow: 'fullscreen',
-    //     title: 'About Game "2048"',
-    //     text: 'This game is fully free for you and no adds!',
-    //     imageUrl: './Photo.png',
-    //     imageHeight: 200,
-    //     imageAlt: 'Developer photo'
-    // },
-
-    // )
 }                                                                       //////////////////////////////
     ;
 GameManager.prototype.keepPlaying = function () {
